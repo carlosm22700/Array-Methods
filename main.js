@@ -51,88 +51,92 @@ const totalYears = inventors.reduce((acc, inventor) => {
 
 console.log(totalYears);
 
+// Array.prototype.map()
+// 6. Map the people array such that the new array consists of strings with the names formatted as "First Last", e.g., "Becker, Carl" should be mapped to "Carl Becker".
+// Hint: As a start, consider using the String.prototype.split method to "split" the string using ', ' as the separator
+
+const formattedNames = people.map(person => {
+  const [lastName, firstName] = person.split(', ');
+  return `${firstName} ${lastName}`;
+})
+
+console.log(formattedNames);
+
+// Array.prototype.reduce()
+// 7. Count the number of instances for each of the data items. The reduce should return an object where the keys are 'car', 'truck', etc. and the values are the count.
+// Hint: Since you want to return an object, be sure to pass an empty {} for the initial value of the "accumulator".
+
 const people = [
-    'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry',
-    'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul',
-    'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David',
-    'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana',
-    'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar',
-    'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric',
-    'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell',
-    'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph',
-    'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank',
-    'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony',
-    'Blake, William'
-  ];
-  
-  // Array.prototype.map()
-  // 6. Map the people array such that the new array consists of strings with the names formatted as "First Last", e.g., "Becker, Carl" should be mapped to "Carl Becker".
-  // Hint: As a start, consider using the String.prototype.split method to "split" the string using ', ' as the separator
+  'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry',
+  'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul',
+  'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David',
+  'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana',
+  'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar',
+  'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric',
+  'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell',
+  'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph',
+  'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank',
+  'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony',
+  'Blake, William'
+];
 
-  const formattedNames = people.map(person => {
-    const [lastName, firstName] = person.split(', ');
-    return `${firstName} ${lastName}`;
-  })
+const data = [
+  'car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van',
+  'bike', 'walk', 'car', 'van', 'car', 'truck'
+];
 
-  console.log(formattedNames);
+const count = data.reduce((acc, vehicle) => {
+  if (acc[vehicle]) {
+    acc[vehicle] += 1;
+  } else {
+    acc[vehicle] = 1;
+  }
+  return acc;
+}, {});
+
+console.log(count);
+
+// Array.prototype.some()
+// 8. Check if at least one person is 19 or older?
+// Hint: To get today's year, use the getFullYear method of new Date(), i.e., new Date().getFullYear()
+
+const devs = [
+  { name: 'Wes', year: 1988 },
+  { name: 'Kait', year: 1986 },
+  { name: 'Irv', year: 1970 },
+  { name: 'Lux', year: 2015 }
+];
+// new date creates a new Date object (ex: Jul 24 00), then the getFullYear method converts the year from the date to a full year (ex 2000)
+const currentYear = new Date().getFullYear();
+const isSomeoneOldEnough = devs.some(dev => currentYear - dev.year >= 19);
+
+console.log(isSomeoneOldEnough);
+
+// Array.prototype.every()
+// 9. Check if everyone is 19 or older?
+
+const isEveryoneOldEnough = devs.every(dev => currentYear - dev.year >= 19);
+
+console.log(isEveryoneOldEnough); // should return false
+
+// Array.prototype.find()
+// 10. Find the comment with the id of 823423
+const comments = [
+  { text: 'Love this!', id: 523423 },
+  { text: 'Super good', id: 823423 },
+  { text: 'You are the best', id: 2039842 },
+  { text: 'Ramen is my fav food ever', id: 123523 },
+  { text: 'Nice Nice Nice!', id: 542328 }
+];
+const findCommentByID = comments.find(comment => comment.id === 823423);
+
+console.log(findCommentByID);
+
+// Array.prototype.findIndex()
+// 11. Find the index of the comment with an id of 123523
+const findIndexByID = comments.findIndex(comment => comment.id === 123523);
+
+console.log(findIndexByID);
 
 
-  const data = [
-    'car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van',
-    'bike', 'walk', 'car', 'van', 'car', 'truck'
-  ];
-  
-  // Array.prototype.reduce()
-  // 7. Count the number of instances for each of the data items. The reduce should return an object where the keys are 'car', 'truck', etc. and the values are the count.
-  // Hint: Since you want to return an object, be sure to pass an empty {} for the initial value of the "accumulator".
-
-  const count = data.reduce((acc, vehicle) => {
-    if (acc[vehicle]) {
-      acc[vehicle] += 1;
-    } else {
-      acc[vehicle] = 1;
-    }
-    return acc;
-  }, {});
-
-  console.log(count);
-
-  const devs = [
-    { name: 'Wes', year: 1988 },
-    { name: 'Kait', year: 1986 },
-    { name: 'Irv', year: 1970 },
-    { name: 'Lux', year: 2015 }
-  ];
-  
-  // Array.prototype.some()
-  // 8. Check if at least one person is 19 or older?
-  // Hint: To get today's year, use the getFullYear method of new Date(), i.e., new Date().getFullYear()
-  const currentYear = new Date().getFullYear();
-  const is19OrOlder = devs.some(dev => currentYear - dev.year >= 19);
-  
-  console.log(is19OrOlder);
-
-  // Array.prototype.every()
-  // 9. Check if everyone is 19 or older?
-  const isEveryone19OrOlder = devs.every(dev => currentYear - dev.year >= 19);
-  console.log(isEveryone19OrOlder); // false
-
-  const comments = [
-    { text: 'Love this!', id: 523423 },
-    { text: 'Super good', id: 823423 },
-    { text: 'You are the best', id: 2039842 },
-    { text: 'Ramen is my fav food ever', id: 123523 },
-    { text: 'Nice Nice Nice!', id: 542328 }
-  ];
-  
-  // Array.prototype.find()
-  // 10. Find the comment with the id of 823423
-  const commentWithId823423 = comments.find(comment => comment.id === 823423);
-
-  console.log(commentWithId823423); // { text: 'Super good', id: 823423 }
-
-  // Array.prototype.findIndex()
-  // 11. Find the index of the comment with an id of 123523
-  const indexCommentWithId123523 = comments.findIndex(comment => comment.id === 123523);
-  console.log(indexCommentWithId123523); // 3
 
